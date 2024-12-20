@@ -11,7 +11,23 @@ class disk_usage_analyzer:
         self.root = root
         self.root.title("Аналізатор використання диску")
         self.root.geometry("500x300")
+        self.set_dark_mode()
         self.create_widgets()
+
+    def set_dark_mode(self):
+        # налаштування темного режиму
+        self.root.configure(bg='#2E2E2E')  # темний фон для вікна
+        self.dark_text = "#000000"  # світлий текст для темного фону
+        self.dark_button = "#3A3A3A"  # текстова кнопка
+        self.dark_button_active = "#575757"  # активна кнопка
+
+        # оновлення всіх віджетів для темного режиму
+        style = ttk.Style()
+        style.configure("TButton", background=self.dark_button, foreground=self.dark_text, font=("Arial", 10))
+        style.map("TButton", background=[("active", self.dark_button_active)])
+
+        style.configure("TLabel", background='#2E2E2E', foreground=self.dark_text, font=("Arial", 10))
+        style.configure("TCombobox", fieldbackground=self.dark_button, background=self.dark_button, foreground=self.dark_text)
 
     def create_widgets(self):
         # створення віджетів
@@ -54,6 +70,7 @@ class disk_usage_analyzer:
         # стоврення вікна для аналізу папки з фільтром
         folder_analysis_window = tk.Toplevel(self.root)
         folder_analysis_window.title("Аналіз папки")
+        folder_analysis_window.configure(bg='#2E2E2E')
 
         # поле вибору папки
         folder_label = ttk.Label(folder_analysis_window, text="Обрана папка:")
